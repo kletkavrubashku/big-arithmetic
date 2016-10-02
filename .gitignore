@@ -1,6 +1,6 @@
 # Artifacts
-output
-factorial
+lib
+bin
 
 # CMake
 CMakeCache.txt
