@@ -5,15 +5,19 @@
 #include <fstream>
 #include <iostream>
 
-BigArithmetic::UInteger Factorial(int n)
+BigArithmetic::UInteger Fibonacci(int n)
 {
-    BigArithmetic::UInteger result = 1;
-    for (int i = 2; i <= n; ++i)
+    BigArithmetic::UInteger a1 = 1;
+    BigArithmetic::UInteger a2 = 1;
+    for (int i = 3; i <= n; ++i)
     {
-        result = result * i;
+        const BigArithmetic::UInteger& next = a1 + a2;
+        a1 = a2;
+        a2 = next;
+        
         Progress::Print(i, n);
     }
-    return result;
+    return a2;
 }
 
 int main() {
@@ -25,7 +29,7 @@ int main() {
 
     Progress::SetEnable(true);
     Progress::Init();
-    const BigArithmetic::UInteger& result = Factorial(number);
+    const BigArithmetic::UInteger& result = Fibonacci(number);
     Progress::Deinit();
 
     std::cout

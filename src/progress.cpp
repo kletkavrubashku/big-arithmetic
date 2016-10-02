@@ -14,11 +14,11 @@ namespace Progress
         }
     }
 
-    void Print(double value)
+    void Print(double value, double max)
     {
         if (ShowProgress)
         {
-            printf("\rProgress: %.2f%c", value, '%');
+            printf("\rProgress: %.2f%c", 100 * (double)value/max, '%');
         }
     }
 

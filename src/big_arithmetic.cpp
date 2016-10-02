@@ -11,6 +11,37 @@ namespace BigArithmetic
         }
     }
 
+    UInteger operator+(const UInteger& a, const UInteger& b)
+    {
+        UInteger result = 0;
+        result.Value.resize(std::max(a.Value.size(), b.Value.size()), 0);
+        for(int aI = 0; aI < a.Value.size(); ++aI)
+        {
+            result.Value[aI] += a.Value[aI];
+        }
+        for(int bI = 0; bI < b.Value.size(); ++bI)
+        {
+            result.Value[bI] += b.Value[bI];
+        }
+
+
+        for (int rI = 0; rI < result.Value.size(); ++rI)
+        {
+            const uint8_t digit = result.Value[rI] % 10;
+            const uint8_t excess = result.Value[rI] / 10;
+            result.Value[rI] = digit;
+            if (excess > 0)
+            {
+                if (result.Value.size() <= rI + 1)
+                {
+                    result.Value.push_back(0);
+                }
+                result.Value[rI + 1] += excess;
+            }
+        }
+        return result;
+    }
+
     UInteger operator*(const UInteger& a, const UInteger& b)
     {
         auto addToPos = [](UInteger& uInt, int pos, uint8_t a)
